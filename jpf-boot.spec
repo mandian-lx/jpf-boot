@@ -48,6 +48,10 @@ API documentation for %{name}.
 find . -name "*.jar" -delete
 find . -name "*.class" -delete
 
+# Fix path
+%pom_xpath_remove "pom:build/pom:outputDirectory" %{name}-pom.xml
+%pom_xpath_remove "pom:build/pom:directory" %{name}-pom.xml
+
 # Fix missing version
 %pom_xpath_inject "pom:plugin[pom:artifactId[./text()='maven-compiler-plugin']]" "
 	<version>any</version>" %{name}-pom.xml
